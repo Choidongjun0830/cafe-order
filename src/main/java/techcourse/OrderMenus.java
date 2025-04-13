@@ -17,6 +17,17 @@ public class OrderMenus {
         }
     }
 
+    public int computeDrinkCount() {
+        int drinkCount = 0;
+        for (Entry<Menu, Integer> orderMenu : orderMenus.entrySet()) {
+            if (orderMenu.getKey().isDrink()) {
+                drinkCount += orderMenu.getValue();
+            }
+        }
+
+        return drinkCount;
+    }
+
     public Map<Menu, Integer> getOrderMenus() {
         return Collections.unmodifiableMap(orderMenus);
     }
