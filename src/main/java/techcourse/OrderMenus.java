@@ -1,0 +1,23 @@
+package techcourse;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+public class OrderMenus {
+
+    private final Map<Menu, Integer> orderMenus = new HashMap<>();
+
+    public OrderMenus(String[] items, int[] quantities) {
+        //TODO: items와 quantites 길이가 다르면 예외
+        for (int i = 0; i < items.length; i++) {
+            Menu menu = Menu.getMenuByName(items[i]);
+            orderMenus.put(menu, quantities[i]);
+        }
+    }
+
+    public Map<Menu, Integer> getOrderMenus() {
+        return Collections.unmodifiableMap(orderMenus);
+    }
+}
