@@ -18,6 +18,10 @@ public class OrderMenu {
         return menu.isDrink();
     }
 
+    public boolean isAmericano() {
+        return menu == Menu.AMERICANO;
+    }
+
     public int getQuantity() {
         return quantity;
     }
