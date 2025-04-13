@@ -15,6 +15,6 @@ public class DrinkQuantityPromotion implements Promotion{
 
     @Override
     public int applyPromotion() {
-        return (int) (orderMenus.computeTotalPrice() * 0.1);
+        return (int) (orderMenus.computeDrinkTotalPrice() * 0.1);
     }
 }
