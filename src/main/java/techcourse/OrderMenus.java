@@ -1,43 +1,52 @@
 package techcourse;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public class OrderMenus {
 
-    private final Map<Menu, Integer> orderMenus = new HashMap<>();
+    private final List<OrderMenu> orderMenus = new ArrayList<>();
 
     public OrderMenus(String[] items, int[] quantities) {
-        //TODO: items와 quantites 길이가 다르면 예외
         for (int i = 0; i < items.length; i++) {
             Menu menu = Menu.getMenuByName(items[i]);
-            orderMenus.put(menu, quantities[i]);
+            orderMenus.add(new OrderMenu(menu, quantities[i]));
         }
     }
 
     public int computeTotalPrice() {
         int totalPrice = 0;
-        for (Entry<Menu, Integer> orderMenu : orderMenus.entrySet()) {
-            Menu menu = orderMenu.getKey();
-            totalPrice += menu.getPrice() * orderMenu.getValue();
+        for (OrderMenu orderMenu : orderMenus) {
+            totalPrice += orderMenu.computePrice();
+        }
+        return totalPrice;
+    }
+
+    public int computeDrinkTotalPrice() {
+        int totalPrice = 0;
+        for (OrderMenu orderMenu : orderMenus) {
+            if (orderMenu.isDrink()) {
+                totalPrice += orderMenu.computePrice();
+            }
         }
         return totalPrice;
     }
 
     public int computeDrinkCount() {
         int drinkCount = 0;
-        for (Entry<Menu, Integer> orderMenu : orderMenus.entrySet()) {
-            if (orderMenu.getKey().isDrink()) {
-                drinkCount += orderMenu.getValue();
+        for (OrderMenu orderMenu : orderMenus) {
+            if (orderMenu.isDrink()) {
+                drinkCount += orderMenu.getQuantity();
             }
         }
 
         return drinkCount;
     }
 
-    public Map<Menu, Integer> getOrderMenus() {
-        return Collections.unmodifiableMap(orderMenus);
+    public List<OrderMenu> getOrderMenus() {
+        return Collections.unmodifiableList(orderMenus);
     }
 }
