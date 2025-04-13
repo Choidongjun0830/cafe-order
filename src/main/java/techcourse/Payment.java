@@ -1,13 +1,14 @@
 package techcourse;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Payment {
 
     private final List<Promotion> promotions;
 
-    public Payment(final OrderMenus orderMenus) {
-        this.promotions = List.of(new AmericanoPromotion(orderMenus), new DrinkQuantityPromotion(orderMenus));
+    public Payment(final Promotion... promotions) {
+        this.promotions = Arrays.asList(promotions);
     }
 
     public int computeTotalDiscountPrice() {

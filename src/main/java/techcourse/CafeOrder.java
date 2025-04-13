@@ -1,7 +1,5 @@
 package techcourse;
 
-import java.util.List;
-
 public class CafeOrder {
 
     public OrderMenus getOrderMenus(final String[] items, final int[] quantities) {
@@ -10,7 +8,7 @@ public class CafeOrder {
 
     public int calculateTotalPrice(String[] items, int[] quantities) {
         OrderMenus orderMenus = getOrderMenus(items, quantities);
-        Payment payment = new Payment(orderMenus);
+        Payment payment = new Payment(new AmericanoPromotion(orderMenus), new DrinkQuantityPromotion(orderMenus));
 
         return orderMenus.computeTotalPrice() - payment.computeTotalDiscountPrice();
     }
