@@ -3,8 +3,6 @@ package techcourse;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class OrderMenus {
 
@@ -18,32 +16,29 @@ public class OrderMenus {
     }
 
     public int computeTotalPrice() {
-        int totalPrice = 0;
-        for (OrderMenu orderMenu : orderMenus) {
-            totalPrice += orderMenu.computePrice();
-        }
-        return totalPrice;
+        return orderMenus.stream()
+                .mapToInt(OrderMenu::computePrice)
+                .sum();
     }
 
     public int computeDrinkTotalPrice() {
-        int totalPrice = 0;
-        for (OrderMenu orderMenu : orderMenus) {
-            if (orderMenu.isDrink()) {
-                totalPrice += orderMenu.computePrice();
-            }
-        }
-        return totalPrice;
+        return orderMenus.stream()
+                .filter(OrderMenu::isDrink)
+                .mapToInt(OrderMenu::computePrice)
+                .sum();
     }
 
     public int computeDrinkCount() {
-        int drinkCount = 0;
-        for (OrderMenu orderMenu : orderMenus) {
-            if (orderMenu.isDrink()) {
-                drinkCount += orderMenu.getQuantity();
-            }
-        }
+        return orderMenus.stream()
+                .filter(OrderMenu::isDrink)
+                .mapToInt(OrderMenu::getQuantity)
+                .sum();
+    }
 
-        return drinkCount;
+    public long getAmericanoQuantity() {
+        return orderMenus.stream()
+                .filter(OrderMenu::isAmericano)
+                .count();
     }
 
     public List<OrderMenu> getOrderMenus() {
