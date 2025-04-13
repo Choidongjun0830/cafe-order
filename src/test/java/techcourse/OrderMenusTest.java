@@ -2,7 +2,6 @@ package techcourse;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Map.Entry;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -26,5 +25,16 @@ class OrderMenusTest {
         OrderMenus orderMenus = new OrderMenus(items, quantities);
 
         assertThat(orderMenus.computeDrinkCount()).isEqualTo(6);
+    }
+
+    @Test
+    @DisplayName("주문 상품 총액 계산 테스트")
+    void computeTotalPrice() {
+        String[] items = new String[]{"아메리카노", "라떼", "모카", "크로와상"};
+        int[] quantities = new int[]{1, 2, 3, 4};
+
+        OrderMenus orderMenus = new OrderMenus(items, quantities);
+
+        assertThat(orderMenus.computeTotalPrice()).isEqualTo(25000);
     }
 }

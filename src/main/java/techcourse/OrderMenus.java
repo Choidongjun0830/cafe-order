@@ -17,6 +17,15 @@ public class OrderMenus {
         }
     }
 
+    public int computeTotalPrice() {
+        int totalPrice = 0;
+        for (Entry<Menu, Integer> orderMenu : orderMenus.entrySet()) {
+            Menu menu = orderMenu.getKey();
+            totalPrice += menu.getPrice() * orderMenu.getValue();
+        }
+        return totalPrice;
+    }
+
     public int computeDrinkCount() {
         int drinkCount = 0;
         for (Entry<Menu, Integer> orderMenu : orderMenus.entrySet()) {
